@@ -11,4 +11,8 @@ public interface UserService {
 	void insertUser(Users user);
 	
 	List<Users>getAllUsers();
+	
+	Users getByEmail(String email);
+	
+	List<Users> findAllOderByNameDesc(String name);
 }

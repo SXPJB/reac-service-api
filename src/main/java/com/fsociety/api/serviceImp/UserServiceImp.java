@@ -24,7 +24,6 @@ public class UserServiceImp implements UserService{
 		try {
 			listUser=usersRepository.findAll();
 			listUser=listUser.stream().filter(u-> u.getEmail().equals(user.getEmail()) &&u.getPass().equals(user.getPass())).collect(Collectors.toList());
-			System.out.println(listUser);
 			if(!listUser.isEmpty()) {
 				user1= listUser.get(0);
 			}
@@ -60,6 +59,35 @@ public class UserServiceImp implements UserService{
 			listUsers=null;
 		}
 		return listUsers;
+	}
+
+
+	@Override
+	public Users getByEmail(String email) {
+		Users us = null;
+		try {
+			
+			us=usersRepository.findByEmailAddress(email);
+			
+		} catch (Exception e) {
+			System.out.println("Error"+e.getMessage());
+		}
+		
+		
+		return us;
+	}
+
+
+	@Override
+	public List<Users> findAllOderByNameDesc(String name) {
+		List<Users> listOrder=null;
+		try {
+			listOrder=usersRepository.findAllOderByNameDesc(name+"%");
+		} catch (Exception e) {
+			System.out.println("Error"+e.getMessage());
+		}
+		
+		return listOrder;
 	}
 
 }
